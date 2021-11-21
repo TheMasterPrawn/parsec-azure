@@ -1,16 +1,12 @@
 # Require the reboot plugin.
 # useful config details https://gist.github.com/myuseringithub/0a4506b45f6ea2dbece8d83155ae0120
 Vagrant.configure("2") do |config|
-  config.vm.box = "gusztavvargadr/windows-10" # https://app.vagrantup.com/StefanScherer/boxes/windows_10
-  #config.vm.box = "basewin10" # https://app.vagrantup.com/StefanScherer/boxes/windows_10
+  config.vm.box = "cdaf/WindowsServerStandard"
   BOX_NAME   = "cdmwin10test"
   BOX_RAM_MB = "4096"
   BOX_CPU_COUNT = "4"
   BOX_DISK_SIZE = "300GB"
-  BOX_PROVIDER  = "hyper-v"
 
-  #config.vm.provider = BOX_PROVIDER 
-  #config.vm.define = "BOX_NAME"
   config.vm.hostname = BOX_NAME
   config.vm.guest = :windows
   config.vm.communicator = "winrm"
@@ -37,9 +33,6 @@ Vagrant.configure("2") do |config|
   # .box images available from https://app.vagrantup.com/cdaf
 
   # use the plaintext WinRM transport and force it to use basic authentication.
-  # NB this is needed because the default negotiate transport stops working
-  #    after the domain controller is installed.
-  #    see https://groups.google.com/forum/#!topic/vagrant-up/sZantuCM0q4
   config.winrm.transport = :plaintext
   config.winrm.basic_auth_only = true
   #config.vm.boot_timeout = 1200
@@ -54,27 +47,28 @@ Vagrant.configure("2") do |config|
     v.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
     v.customize ["modifyvm", :id, "--nested-hw-virt", "off"]
     
-    v.customize ["storageattach", :id, 
-            "--storagectl", "IDE Controller", 
-            "--port", "0", "--device", "1", 
-            "--type", "dvddrive", 
-            "--medium", "C:\\Program Files\\Oracle\\VirtualBox\\VBoxGuestAdditions.iso"]    
+    #v.customize ["storageattach", :id, 
+    #        "--storagectl", "IDE Controller", 
+    #        "--port", "0", "--device", "1", 
+    #        "--type", "dvddrive", 
+    #        "--medium", "C:\\Program Files\\Oracle\\VirtualBox\\VBoxGuestAdditions.iso"]    
   end
 
-  config.vm.provider "hyperv" do |h|
+  config.vm.provider "hyperv" do |h, override|
     h.vm_integration_services = {    guest_service_interface: true,    CustomVMSRV: true  }
     h.cpus = BOX_CPU_COUNT
     h.memory = BOX_RAM_MB
     h.linked_clone = true 
     h.vmname = BOX_NAME
-    #h.override.vm.synced_folder ".", "/vagrant", disabled: true
+    override.vm.synced_folder ".", "/vagrant", disabled: true
     h.enable_virtualization_extensions = true
     
     #config.vm.network "public_network", bridge: "vswitch" #add vswitch in hyperv manager
   end
 
-  config.vm.provision "file", source: "ps1", destination: "/parsec-config/ps1" #copy scripts into the vm
+  #config.vm.provision "file", source: "ps1", destination: "/parsec-config/ps1" #copy scripts into the vm
   config.vm.provision "shell", path: "ps1/Setup-CommonTools.ps1" #install tooling and set locale 
-  config.vm.provision "shell", path: "ps1/Set-MaxDiskSize.ps1" # expands C to max value
-  config.vm.provision :reload
+  config.vm.provision "shell", path: "ps1/Set-LangLocale.ps1" #install tooling and set locale 
+  #config.vm.provision "shell", path: "ps1/Set-MaxDiskSize.ps1" # expands C to max value
+  #config.vm.provision :reload
 end

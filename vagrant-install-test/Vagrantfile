@@ -73,7 +73,7 @@ Vagrant.configure("2") do |config|
     #config.vm.network "public_network", bridge: "vswitch" #add vswitch in hyperv manager
   end
 
-  config.vm.provision "file", source: "ps1", destination: "/dev/ps1" #copy scripts into the vm
+  config.vm.provision "file", source: "ps1", destination: "/parsec-config/ps1" #copy scripts into the vm
   config.vm.provision "shell", path: "ps1/Setup-CommonTools.ps1" #install tooling and set locale 
   config.vm.provision "shell", path: "ps1/Set-MaxDiskSize.ps1" # expands C to max value
   config.vm.provision :reload

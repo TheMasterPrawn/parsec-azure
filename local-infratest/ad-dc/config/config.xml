@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<Settings>
+    <DomainName>corp.local</DomainName>
+    <NetbiosName>CORP</NetbiosName>
+	<SafeModeAdministratorPassword>P@!ssw0rdzAreFunny$</SafeModeAdministratorPassword>
+	<users>
+		<ou>OU=megacorp,DC=corp,DC=local</ou>
+		<mailSuffix>megacorp.ie</mailSuffix>
+		<datafile>c:\tmp\ad_data\14.csv</datafile>
+		<defaultPassword>P@ssw0rd123!!</defaultPassword>
+	</users>
+	<groups>
+		<ou>OU=mcgroups,DC=corp,DC=local</ou>
+	</groups>
+</Settings>

@@ -27,7 +27,6 @@ if (!(Test-Path -Path $key)) {
     New-Item -Path $key
 }
 
-
 try 
 {
     $searchKey = Get-ItemProperty -Path $key -Name $valueName -ErrorAction SilentlyContinue

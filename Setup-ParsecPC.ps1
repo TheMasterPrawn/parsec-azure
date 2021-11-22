@@ -28,3 +28,5 @@ $installers = @('steam')
 .\Get-GameInstallers.ps1 -installers $installers
 .\Disable-Updates.ps1
 Update-Registry
+.\Get-Software.ps1
+

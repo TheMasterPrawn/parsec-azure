@@ -24,7 +24,7 @@ function Update-Registry($keys = "regkeys.csv")
 }
 
 $installers = @('steam')
-$psscriptroot
+
 .\Get-GameInstallers.ps1 -installers $installers
 .\Disable-Updates.ps1
 Update-Registry

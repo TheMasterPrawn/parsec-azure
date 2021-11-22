@@ -1,1 +1,6 @@
 Key,ValueName,ValueData,ValueType,Note
+HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon,AutoAdminLogon,1,Dword,
+HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon,AutoLogonCount,9999,Dword,
+HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon,DefaultUserName,vagrant,String,
+HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon,DefaultPassword,vagrant,String,
+HKLM:\SOFTWARE\Policies\Microsoft\Windows\Personalization,NoLockScreen,1,Dword,

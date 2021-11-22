@@ -1,3 +1,3 @@
 Name,Uri,Path,Type,Installer,InstallArgs
-Virtual Audio,https://software.muzychenko.net/trials/vac460.zip,C:\parsec-azure\VAC460.zip,ZIP,C:\parsec-azure\VACSetup\setup64.exe,"""-s -k 30570681-0a8b-46e5-8cb2-d835f43af0c5"""
-Azure NV Grid Driver,https://go.microsoft.com/fwlink/?linkid=874181,C:\parsec-azure\grid.exe,EXE,C:\parsec-azure\grid.exe,"""/s /n"""
+Virtual Audio,https://software.muzychenko.net/trials/vac460.zip,C:\parsec-azure\data\VAC460.zip,ZIP,C:\parsec-azure\data\setup64.exe,-s -k 30570681-0a8b-46e5-8cb2-d835f43af0c5
+Azure NV Grid Driver,https://go.microsoft.com/fwlink/?linkid=874181,C:\parsec-azure\data\grid.exe,EXE,C:\parsec-azure\data\grid.exe,/s /n

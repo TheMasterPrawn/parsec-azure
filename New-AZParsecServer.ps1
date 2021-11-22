@@ -15,20 +15,22 @@
 param (
     $projName = "ParsecGaming",
     $userName = "admin",        
-    $password = "password"
+    $password = "53ba152d-6840-44bb-984d-fd2709b3c1ea"
 )
 
-New-AzResourceGroup -Name CloudGamingRg -Location 'westeurope'
+$rgname = $projName + "Rg"
+New-AzResourceGroup -Name $rgname  -Location 'westeurope'
 
 $parameters = @{
     Name              = "$projName"
-    ResourceGroupName = $projName + "Rg"
-    TemplateFile      = "$psscriptroot\azuredeploy.json"
-    dnsLabelPrefix    = $projName + "$((1..13 | ForEach-Object { [char[]](97..122) | Get-Random }) -join '')"
-    adminUsername     = $userName
+    ResourceGroupName = $rgname 
+    TemplateFile      = ".\template.json"
+    #dnsLabelPrefix    = $projName + "$((1..13 | ForEach-Object { [char[]](97..122) | Get-Random }) -join '')"
+    #adminUsername     = $userName
     adminPassword     = ConvertTo-SecureString -String $password -AsPlainText -Force
     # librarySizeGB     = 1024
+    location          = "westeurope"
 }
 
-New-AzResourceGroupDeployment @parameters
-Restart-AzVm -Name TheBeast -ResourceGroupName CloudGamingRg -PerformMaintenance
+New-AzResourceGroupDeployment -TemplateParameterFile .\parameters.json -TemplateFile .\template.json
+Restart-AzVm -Name ParsecGaming -ResourceGroupName $rgname -PerformMaintenance
